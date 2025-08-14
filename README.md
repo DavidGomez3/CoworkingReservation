@@ -31,6 +31,7 @@ Si bien la implementación cumple los requisitos planteados, existen diversas á
 - Ampliar la lógica del motor de reservas para soportar reglas y restricciones más avanzadas.
 
 ## Estructura del Proyecto
+```plaintext
 .
 └── CoworkingReservation/
     ├── components/
@@ -63,6 +64,7 @@ Si bien la implementación cumple los requisitos planteados, existen diversas á
         └── time/
             ├── range.ts                     # Cálculos de rangos/intervalos de tiempo
             └── tz.ts                        # Utilidades de zona horaria y normalización
+```
 
 ## Instalación y Ejecución
 ```bash

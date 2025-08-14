@@ -67,6 +67,15 @@ Si bien la implementación cumple los requisitos planteados, existen diversas á
 ```
 
 ## Instalación y Ejecución
+Asegúrese de tener instalado:
+
+- **Node.js** v20 o superior  
+  [Descargar Node.js](https://nodejs.org/)
+- **pnpm** (gestor de paquetes)  
+  Instalar con:  
+  ```bash
+  npm install -g pnpm
+  
 ```bash
 # Clonar el repositorio
 git clone https://github.com/DavidGomez3/CoworkingReservation.git

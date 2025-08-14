@@ -76,8 +76,6 @@ export function useCreateReserva(page: number, pageSize: number) {
     },
     onSuccess: (data, _input, ctx) => {
       // Cuando llega el ID real, sustituimos el optimista en el store
-      console.log(data);
-
       if (ctx?.optimisticId && data?.id) {
         MisReservas.replaceTemp(ctx.optimisticId, data.id);
       }

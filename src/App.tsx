@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import AgendaDayViewDemo from './pages/AgendaDayViewDemo'
 
 function App() {
   return (
     <>
-      CoworkingReservation
+      <AgendaDayViewDemo>
+      </AgendaDayViewDemo>
     </>
   )
 }

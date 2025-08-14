@@ -1,69 +1,92 @@
-# React + TypeScript + Vite
+# Sistema de Gestión de Reservas – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada como parte de una prueba técnica para la gestión de reservas en un espacio de coworking. Permite a los usuarios visualizar espacios disponibles, consultar reservas con paginación, crear nuevas reservas, ver detalles de un espacio y eliminar reservas.
 
-Currently, two official plugins are available:
+## Enfoque y Metodología
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Previo al desarrollo, se llevó a cabo un proceso de análisis y planificación que incluyó:
 
-## Expanding the ESLint configuration
+- Investigación de diseño para definir la experiencia de usuario, los flujos de interacción y la composición de componentes.
+- Formalización de la arquitectura del frontend, priorizando la escalabilidad, mantenibilidad y claridad en la organización del código.
+- Evaluación de librerías existentes para la gestión de reservas y visualización de agendas.  
+  Se optó por desarrollar un motor propio para el control de slots, horarios y estados de reservas, con el fin de demostrar la capacidad de construir una solución completa desde cero sin depender de implementaciones externas.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Decisiones Técnicas
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Framework: React + TypeScript con Vite para un desarrollo moderno y eficiente.
+- Interfaz de usuario: Tailwind CSS y shadcn/ui para la creación de componentes accesibles y adaptables.
+- Gestión de datos: TanStack Query para sincronización con el backend y manejo de caché.
+- Manejo de estados y eventos: Hooks y contexto cuando es necesario, evitando complejidad innecesaria.
+- Técnica de "front positivo": La interfaz refleja de forma inmediata las acciones del usuario mientras se espera la confirmación del backend.
+- Contenedores: Configuración opcional con Docker y docker-compose para facilitar la ejecución en entornos controlados.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Potenciales Mejoras
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Si bien la implementación cumple los requisitos planteados, existen diversas áreas de mejora:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Separar más componentes de la página inicial para aumentar la reutilización y modularidad.
+- Definir estilos fijos y consistentes en toda la aplicación.
+- Incorporar pruebas unitarias y de integración.
+- Mejorar la accesibilidad y la capacidad de internacionalización.
+- Ampliar la lógica del motor de reservas para soportar reglas y restricciones más avanzadas.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Estructura del Proyecto
+CoworkingReservation/
+├── components/
+│ └── ui/
+│
+├── core/ # Lógica de dominio “pura” (sin dependencias de UI)
+│ └── slots/
+│ └── generateDaySlotsForSpace.ts # Motor de generación de slots por espacio/día
+│
+├── domain/
+│ └── types.ts # Tipos y modelos de dominio (TS)
+│
+├── lib/
+│ ├── agenda/
+│ │ └── isMine.ts # Utilidades de agenda (p. ej. pertenencia de reserva)
+│ │
+│ ├── api/ # Capa de acceso a datos
+│ │ ├── client.ts 
+│ │ ├── fakeDb.ts # Fuente de datos simulada (desarrollo)
+│ │ ├── services.ts # Servicios de alto nivel (Espacios/Reservas)
+│ │ └── types.ts # Tipos específicos de la API
+│ │
+│ ├── query/
+│ │ ├── hooks.ts # Hooks de TanStack Query (queries/mutations)
+│ │ └── keys.ts # Claves de cache y helpers de query
+│ │
+│ ├── state/
+│ │ └── misReservas.ts # Estado local/derivado (p. ej. reservas propias)
+│ │
+│ └── utils.ts # Utilidades generales
+│
+├── pages/
+│ └── AgendaDayViewDemo.tsx # Página de demostración (vista diaria de agenda)
+│
+├── ui/
+│ └── tokens/
+│ └── stateStyles.ts # “Design tokens” y estilos derivados por estado
+│
+└── utils/
+└── time/
+├── range.ts # Cálculos de rangos/intervalos de tiempo
+└── tz.ts # Utilidades de zona horaria y normalización
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Instalación y Ejecución
+```bash
+# Clonar el repositorio
+git clone https://github.com/DavidGomez3/CoworkingReservation.git
+cd CoworkingReservation
+
+# Instalar dependencias
+pnpm install
+
+# Iniciar en desarrollo
+pnpm run dev
+
+# Compilar para producción
+pnpm build
+
+# Ejecutar con Docker (opcional)
+docker compose up --build

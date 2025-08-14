@@ -31,47 +31,38 @@ Si bien la implementación cumple los requisitos planteados, existen diversas á
 - Ampliar la lógica del motor de reservas para soportar reglas y restricciones más avanzadas.
 
 ## Estructura del Proyecto
-CoworkingReservation/
-├── components/
-│   └── ui/
-│
-├── core/                                # Lógica de dominio “pura” (sin dependencias de UI)
-│   └── slots/
-│       └── generateDaySlotsForSpace.ts  # Motor de generación de slots por espacio/día
-│
-├── domain/
-│   └── types.ts                         # Tipos y modelos de dominio (TS)
-│
-├── lib/
-│   ├── agenda/
-│   │   └── isMine.ts                    # Utilidades de agenda (p. ej. pertenencia de reserva)
-│   │
-│   ├── api/                             # Capa de acceso a datos
-│   │   ├── client.ts
-│   │   ├── fakeDb.ts                    # Fuente de datos simulada (desarrollo)
-│   │   ├── services.ts                  # Servicios de alto nivel (Espacios/Reservas)
-│   │   └── types.ts                     # Tipos específicos de la API
-│   │
-│   ├── query/
-│   │   ├── hooks.ts                     # Hooks de TanStack Query (queries/mutations)
-│   │   └── keys.ts                      # Claves de cache y helpers de query
-│   │
-│   ├── state/
-│   │   └── misReservas.ts               # Estado local/derivado (p. ej. reservas propias)
-│   │
-│   └── utils.ts                         # Utilidades generales
-│
-├── pages/
-│   └── AgendaDayViewDemo.tsx            # Página de demostración (vista diaria de agenda)
-│
-├── ui/
-│   └── tokens/
-│       └── stateStyles.ts               # “Design tokens” y estilos derivados por estado
-│
-└── utils/
-    └── time/
-        ├── range.ts                     # Cálculos de rangos/intervalos de tiempo
-        └── tz.ts                        # Utilidades de zona horaria y normalización
+.
+└── CoworkingReservation/
+    ├── components/
+    │   └── ui/
+    ├── core/                                # Lógica de dominio “pura” (sin dependencias de UI)/
+    │   └── slots/
+    │       └── generateDaySlotsForSpace.ts  # Motor de generación de slots por espacio/día
+    ├── domain/
+    │   └── types.ts                         # Tipos y modelos de dominio (TS)
+    ├── lib/
+    │   ├── agenda/
+    │   │   └── isMine.ts                    # Utilidades de agenda (p. ej. pertenencia de reserva)
+    │   ├── api/                             # Capa de acceso a datos/
+    │   │   ├── client.ts
+    │   │   ├── fakeDb.ts                    # Fuente de datos simulada (desarrollo)
+    │   │   ├── services.ts                  # Servicios de alto nivel (Espacios/Reservas)
+    │   │   └── types.ts                     # Tipos específicos de la API
+    │   ├── query/
+    │   │   ├── hooks.ts                     # Hooks de TanStack Query (queries/mutations)
+    │   │   └── keys.ts                      # Claves de cache y helpers de query
+    │   ├── state/
+    │   │   └── misReservas.ts               # Estado local/derivado (p. ej. reservas propias)
+    │   └── utils.ts                         # Utilidades generales
+    ├── pages/
+    │   └── AgendaDayViewDemo.tsx            # Página de demostración (vista diaria de agenda)
+    ├── ui/
+    │   └── tokens/
+    │       └── stateStyles.ts               # “Design tokens” y estilos derivados por estado
+    └── utils/
+        └── time/
+            ├── range.ts                     # Cálculos de rangos/intervalos de tiempo
+            └── tz.ts                        # Utilidades de zona horaria y normalización
 
 ## Instalación y Ejecución
 ```bash

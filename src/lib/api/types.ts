@@ -13,6 +13,7 @@ export const EspacioSchema = z.object({
   capacidad: z.number().int().positive(),
   tz: z.string().default("UTC"),
   horarios: z.array(HorarioSchema).min(1),
+  imageUrl: z.string().default("/assets/espacios/default.jpg"),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -32,7 +33,7 @@ export type Reserva = z.infer<typeof ReservaSchema>;
 
 export type Paginated<T> = {
   items: T[];
-  page: number; // 1-based
+  page: number;
   pageSize: number;
   total: number;
   totalPages: number;
